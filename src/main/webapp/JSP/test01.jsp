@@ -16,7 +16,7 @@
 			sum += scores[i];
 		}
 	%>
-	<b> 점수들의 평균은 </b> <u> <%= sum / scores.length %></u>
+	<b> 점수들의 평균은 </b>  <%= sum / scores.length %>
 	<br>
 	<%
 	List<String> scoreList = Arrays.asList(new String[]{"X", "O", "O", "O", "X", "O", "O", "O", "X", "O"});
@@ -29,7 +29,7 @@
 	}
 	%>
 	
-	<b>점수표의 점수는 </b> <u><%= score %></u>
+	<b>점수표의 점수는 </b> <%= score %>
 	<br>
 	
 	<%!
@@ -43,7 +43,7 @@
 		
 	%>
 	
-	<b> 50까지의 합의 결과는 </b> <u><%= getSum(50) %></u>
+	<b> 50까지의 합의 결과는 </b> <%= getSum(50) %>
 	<br>
 	
 	<%
