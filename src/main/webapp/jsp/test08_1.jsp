@@ -5,24 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Test08 jsp 제어문</title>
+<title>Test08 결과창</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<style type="text/css">
+
+	<style type="text/css">
 	.images{
-		width:120px;
-		height:160px;
+		width:280px;
+		height:350px;
 	}
 	
 
-</style>
+	</style>
 </head>
 <body>
-	<%
-		 List<Map<String, Object>> list = new ArrayList<>();
+	<%	
+		List<Map<String, Object>> list = new ArrayList<>();
 	    Map<String, Object> map = new HashMap<String, Object>() {
 	        { 
 	            put("id", 1000);
@@ -67,30 +68,30 @@
 	    };
 	    list.add(map);
 		
+	    int id = Integer.parseInt(request.getParameter("id"));
 	%>
-	
 	<div class="container">
-		<h3 class="text-center"> 책 목록 </h3>
-		 <table  class="table table-striped">
-		 	<tr>
-		 		<th scope="col"> id </th>
-		 		<th scope="col"> 표지 </th>
-		 		<th scope="col"> 제목 </th>
-			</tr>
+		<div class="d-flex">
 			<%
 				for(int i = 0; i < list.size(); i++){
-					//리스트에 있는 맵 하나하나 꺼내기
 					Map<String, Object> listMap = list.get(i);
-					%>
-					<tr>
-					 	<th scope="col"><a  href="/jsp/test08_1.jsp?id=<%=listMap.get("id")%>"><%= listMap.get("id") %></a></th>
-					 	<td> <a href="/jsp/test08_1.jsp?id=<%=listMap.get("id")%>"><img  class = "img-thumbnail images" alt="책표지" src="<%=listMap.get("image")%>"></a></td>
-					 	<td><a href="/jsp/test08_1.jsp?id=<%=listMap.get("id")%>"><span class="text-info"><%=listMap.get("title") %></span></a></td>
-					</tr> 
-					<%
+					if((Integer)listMap.get("id") == id){
+						%>
+						<img src="<%=listMap.get("image")%>"class = "img-thumbnail images" alt="책표지">
+						<div>
+							<span class="display-3"><b><%=listMap.get("title") %></b></span><br>
+							<span class="display-4 text-info"><%=listMap.get("author") %></span><br>
+							<span class="display-4"><%=listMap.get("publisher") %></span>
+						</div>
+						<%
+					}
 				}
-			%>	 
-		 </table>
+			
+			%>
+			
+	
+		</div>
 	</div>
+	
 </body>
 </html>
