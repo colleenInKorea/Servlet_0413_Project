@@ -25,7 +25,7 @@
 		<br>
 		<%
 		//어제 날짜 정리 
-		today.add(Calendar.DATE, -100);
+		/*today.add(Calendar.DATE, -100);
 		out.println(format.format(today.getTime())+"<br>");
 		today.add(Calendar.MONTH, -2);
 		out.println(format.format(today.getTime()) + "<br>");
@@ -35,7 +35,30 @@
 		out.println(format.format(today.getTime()) + "<br>");
 		today.add(Calendar.DATE, 200);
 		out.println(format.format(today.getTime()) + "<br>");
+		*/
 		
+		//Calendar로 정보 얻기
+		int weeks = today.get(Calendar.WEEK_OF_YEAR);
+		
+		out.println(weeks);
+		
+		int day = today.get(Calendar.DAY_OF_WEEK);
+		out.println(day);
+		
+		//날짜 비교
+		Calendar otherDay = Calendar.getInstance();
+		//otherDay.add(Calendar.DATE, 133);
+		
+		int result = today.compareTo(otherDay);
+		out.println(result);
+		
+		if(result > 0){
+			out.println("앞 객체가 더 크다");
+		}else if(result == 0){
+			out.println("두 객체의 크기가 같다.");
+		}else if(result < 0){
+			out.println("뒤의 객체의 크기가 더 크다.");
+		}
 	%>
 </body>
 </html>
