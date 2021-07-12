@@ -84,7 +84,15 @@
 							<td><%= broadmap.get("category") %></td>
 						</tr>
 						<%}
-					}	
+					}else{
+						%>
+						<tr>
+							<td><%= broadmap.get("ch") %></td>
+							<td><%= broadmap.get("name") %></td>
+							<td><%= broadmap.get("category") %></td>
+						</tr>
+						<%
+					}
 				} %>
 				</tbody>
 			</table>
