@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Main artist page</title>
+<title>Music Info page</title>
 
-	<!-- bootstrap CDN link -->
+		<!-- bootstrap CDN link -->
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
 	  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -20,50 +20,44 @@
 		nav{ height : 50px}
 		footer{height:40px}
 		
-		#iuPhoto{
-			width:150px; height:150px; margin:5px;
+		#albumPhoto{
+			width:150px; height:150px; margin:15px;
 		}
 	</style>
 </head>
 <body>
-	<%@ include file="data.jsp" %>
-	
+		<%
+		int id = Integer.parseInt(request.getParameter("id")) ;%>
+		<%@ include file="data.jsp" %>
 	<div id = "wrap">
 		<jsp:include page="header.jsp"/>
 		<jsp:include page="menu.jsp"/>
 		<section>
-			<div class="border border-success d-flex justify-content-start algin-items-center">
-				<img id = "iuPhoto"  alt="" src="<%= (String)artistInfo.get("photo")%>">
+			<div class="border border-success d-flex justify-content-start align-items-center"> 
+				<% for(int i = 0; i < musicList.size(); i++){
+					Map<String, Object> musicMap = musicList.get(i);
+					if(musicMap.get("id").equals(id)){
+				%>
+				<img id = "albumPhoto"  alt="" src="<%= (String)musicMap.get("thumbnail") %>">
 				<div style="margin:10px;">
-					<span class="display-4 font-weight-bold"><%= artistInfo.get("name") %></span><br>
-					<span class="font-italic"><%= artistInfo.get("agency") %></span><br>
-					<span class="font-weight-light"><%= artistInfo.get("debute") %></span>
+					<span class="display-4 font-weight-light"><%= musicMap.get("title") %></span><br>
+					<span class="display-6 text-success font-weight-bold"><%= musicMap.get("singer") %></span><br>
+					<span class="display-6 font-weight-light">앨범 : <%= musicMap.get("album") %></span><br>
+					<span class="display-6 font-weight-light">재생시간 : <%= (Integer)musicMap.get("time")/60 %>:<%= (Integer)musicMap.get("time")%60 %></span><br>
+					<span class="display-6 font-weight-light">작곡가 : <%= musicMap.get("composer") %></span><br>
+					<span class="display-6 font-weight-light">작사가 : <%= musicMap.get("lyricist") %></span>
 				</div>
+				<%}
+				}
+				%>
 			</div>
+			<br>
 			<div >
-				<br>
-				<span class="font-weight-bold mt-10"> 곡 목록</span>
-				<br>
-				<table class="table text-center">
-					<thead class="font-weight-bold">
-						<tr>
-							<th>no</th>
-							<th>제목</th>
-							<th>엘범</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% for(int i = 0; i < musicList.size(); i++){
-								Map<String, Object> musicMap = musicList.get(i);
-						%>	<tr>
-								<td><a href="/jspTemplate/test02/test02_1.jsp?id=<%= musicMap.get("id") %>"><%= musicMap.get("id") %></a></td>
-								<td><a href="/jspTemplate/test02/test02_1.jsp?id=<%= musicMap.get("id") %>"><%= musicMap.get("title") %></a></td>
-								<td><a href="/jspTemplate/test02/test02_1.jsp?id=<%= musicMap.get("id") %>"><%= musicMap.get("album") %></a></td>
-							</tr>
-						<%} %>
-					</tbody>
-				</table>
+				<h4 >가사</h3>
+				<hr>
+				<h5>가사정보 없음</h4>
 			</div>
+			
 		</section>
 		<jsp:include page="footer.jsp"/>
 	
