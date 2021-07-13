@@ -16,7 +16,6 @@
 	#wrap{width:1200px; height: 1000px; margin:auto}
 	header{height:100px}
 	nav{ height : 50px}
-
 	footer{height:40px}
 </style>
 </head>
