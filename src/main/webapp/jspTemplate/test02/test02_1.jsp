@@ -16,18 +16,22 @@
 
 	<style type="text/css">
 		#wrap{width:1200px; height: 1000px; margin:auto}
-		header{height:110px width:1200px}
+		header{height:110px; width:1200px;}
 		nav{ height : 50px}
 		footer{height:40px}
 		
-		#albumPhoto{
-			width:150px; height:150px; margin:15px;
-		}
+		#albumPhoto{ width:150px; height:150px; margin:15px;}
 	</style>
 </head>
 <body>
 		<%
-		int id = Integer.parseInt(request.getParameter("id")) ;%>
+		String title = request.getParameter("title");
+		String id = request.getParameter("id") ;
+		int idNumber =0;
+		if(id != null){
+			idNumber = Integer.parseInt(id);
+		}
+		%>
 		<%@ include file="data.jsp" %>
 	<div id = "wrap">
 		<jsp:include page="header.jsp"/>
@@ -36,7 +40,7 @@
 			<div class="border border-success d-flex justify-content-start align-items-center"> 
 				<% for(int i = 0; i < musicList.size(); i++){
 					Map<String, Object> musicMap = musicList.get(i);
-					if(musicMap.get("id").equals(id)){
+					if(musicMap.get("id").equals(idNumber) || title != null && musicMap.get("title").equals(title)){
 				%>
 				<img id = "albumPhoto"  alt="" src="<%= (String)musicMap.get("thumbnail") %>">
 				<div style="margin:10px;">
@@ -47,8 +51,9 @@
 					<span class="display-6 font-weight-light">작곡가 : <%= musicMap.get("composer") %></span><br>
 					<span class="display-6 font-weight-light">작사가 : <%= musicMap.get("lyricist") %></span>
 				</div>
-				<%}
-				}
+				<%} 
+				
+			}
 				%>
 			</div>
 			<br>
