@@ -28,7 +28,7 @@ public class ServletDBTest01 extends HttpServlet {
 //		String query = "insert into `real_estate`\r\n"
 //				+ "(`realtorId`, `address`, `area`, `type`, `price`, `rentPrice`, `createdAt`, `updatedAt`)\r\n"
 //				+ "value ( 3, '헤라펠리스 101동 5305호', 350, '매매', 1500000, null, now(), now());";
-		
+//		
 //		int count = 0;
 //		try {
 //			count = mysqlService.update(query);
@@ -37,17 +37,17 @@ public class ServletDBTest01 extends HttpServlet {
 //			e.printStackTrace();
 //		}
 		
-		String query = "SELECT * FROM `real_estate`";
+		String query = "SELECT * FROM `real_estate` limit 10";
 		
 		try {
 			ResultSet resultSet = mysqlService.select(query);
 			
 			while (resultSet.next()) {
-				out.println(resultSet.getInt("realtorId"));
-				out.println(resultSet.getString("address"));
-				out.println(resultSet.getString("type"));
-				out.println(resultSet.getInt("price"));
-				out.println(resultSet.getInt("rentPrice"));
+				out.print("메물 주소 : ");
+				out.print(resultSet.getString("address") + ", 타입: ");
+				out.print(resultSet.getString("type") + ", 면적 : ");
+				out.print(resultSet.getInt("area"));
+				out.println();
 			}
 			mysqlService.disconnect();
 		} catch (SQLException e) {
